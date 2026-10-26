@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="az">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Amazon - Ana səhifə</title>
+  <link rel="stylesheet" href="{% static 'shop/style.css' %}">
+</head>
+<body>
+
+  <header>
+    <div class="navbar">
+      <a href="/" class="logo">amazon</a>
+      <form class="search" action="#">
+        <input type="text" placeholder="Məhsul axtar...">
+        <button type="submit">🔍</button>
+      </form>
+      <a href="#" class="nav-link">Salam<strong>Daxil ol</strong></a>
+      <a href="#" class="nav-link">Sifarişlər<strong>və qaytarma</strong></a>
+      <a href="#" class="nav-link"><strong>🛒 Səbət</strong></a>
+    </div>
+    <nav class="subnav">
+      {% for c in categories %}
+        <a href="#">{{ c.name }}</a>
+      {% endfor %}
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Bu gün ən yaxşı təkliflər</h1>
+    <p>Minlərlə məhsul, sürətli çatdırılma</p>
+  </section>
+
+  <main class="container">
+
+    <div class="grid">
+      {% for c in categories|slice:":4" %}
+        <div class="card">
+          <h2>{{ c.name }}</h2>
+          <div class="emoji">{{ c.emoji }}</div>
+          <a href="#" class="link">Hamısına bax</a>
+        </div>
+      {% endfor %}
+    </div>
+
+    <div class="card">
+      <h2 class="section-title">Ən çox satılanlar</h2>
+      <div class="grid">
+        {% for p in products %}
+          <div class="product">
+            <div class="emoji">{{ p.emoji }}</div>
+            <div class="name">{{ p.name }}</div>
+            <div class="stars">{{ p.stars }}</div>
+            <div class="price">${{ p.price|floatformat:2 }}</div>
+            <button class="btn">Səbətə at</button>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
+  </main>
+
+  <a href="#" class="back-to-top">Yuxarı qayıt</a>
+  <footer class="footer">
+    <p>© 2026 Amazon Clone. Tədris layihəsi.</p>
+  </footer>
+
+</body>
+</html>
